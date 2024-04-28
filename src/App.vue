@@ -9,9 +9,13 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container />
+  <div class="tab">
+    <button :key="i" v-for="(item, i) in tab" @click="step = item.page">{{ item.name }}</button>
+  </div>
 
-  <div class="footer">
+  <Container :step="step" />
+
+  <div class="footer" v-if="step === 1">
     <ul class="footer-button-plus">
       <input type="file" id="file" class="inputfile" />
       <label for="file" class="input-plus">+</label>
@@ -20,12 +24,28 @@
 </template>
 
 <script>
-import Container from "./components/Container.vue";
+import Container from "./components/container/Container.vue";
 
 export default {
   name: "App",
   components: {
     Container,
+  },
+  data() {
+    return {
+      tab: [
+        {
+          name: "게시물 목록",
+          page: 0,
+        },
+        {
+          name: "필터 선택",
+          page: 1,
+        },
+        { name: "글 작성", page: 2 },
+      ],
+      step: 0,
+    };
   },
 };
 </script>
