@@ -1,11 +1,11 @@
 <template>
-  {{ data }}
   <div class="post">
     <div class="post-header">
-      <div class="profile"></div>
+      <!-- :style="{ 속성명 : string 형태의 속성 값 }" -->
+      <div class="profile" :style="{ backgroundImage: `url(${data.userImage})` }"></div>
       <span class="profile-name">{{ data.name }}</span>
     </div>
-    <div class="post-body"></div>
+    <div class="post-body" :style="{ backgroundImage: `url(${data.postImage})` }"></div>
     <div class="post-content">
       <p>{{ data.likes }} Likes</p>
       <p>
