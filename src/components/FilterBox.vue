@@ -2,7 +2,9 @@
   <!-- or :class="filter + ' filter-item'" -->
   <div class="filter-item" :class="filter" :style="{ backgroundImage: `url(${image})` }" :key="i" v-for="(filter, i) in filters">
     {{ filter }}
-    <slot></slot>
+    <!-- <slot></slot> -->
+    <br />
+    <button @click="fire(filter)">버튼</button>
   </div>
 </template>
 
@@ -17,8 +19,13 @@ export default {
   data() {
     return {
       filters: filters,
-      selectFilter: "",
     };
+  },
+  methods: {
+    fire(filter) {
+      // this.emitter.emit("작명", "데이터")
+      this.emitter.emit("filter", filter);
+    },
   },
 };
 </script>

@@ -14,7 +14,7 @@
     <button :key="i" v-for="(item, i) in tab" @click="step = item.page">{{ item.name }}</button>
   </div>
 
-  <Container :step="step" :uploadSrc="uploadSrc" :posts="posts" @moreData="moreData" @changeContent="changeContent" />
+  <Container :step="step" :uploadSrc="uploadSrc" :posts="posts" @moreData="moreData" @changeContent="changeContent" :filter="filter" />
 
   <div class="footer" v-if="step === 0">
     <ul class="footer-button-plus">
@@ -50,6 +50,7 @@ export default {
       step: 0,
       uploadSrc: null,
       content: "",
+      filter: "",
     };
   },
   methods: {
@@ -70,7 +71,7 @@ export default {
         date: "May 15",
         liked: false,
         content: this.content,
-        filter: "perpetua",
+        filter: this.filter,
       };
 
       this.posts.unshift(addPost);
@@ -82,6 +83,11 @@ export default {
     changeContent(value) {
       this.content = value;
     },
+  },
+  mounted() {
+    this.emitter.on("filter", (data) => {
+      this.filter = data;
+    });
   },
 };
 </script>

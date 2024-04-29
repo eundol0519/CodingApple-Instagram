@@ -3,6 +3,7 @@
     height: 450px;
     background: cornflowerblue;
     background-size: cover;
+    background-position: center;
 }
 
 .filters {

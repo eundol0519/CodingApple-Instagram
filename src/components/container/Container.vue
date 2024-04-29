@@ -7,15 +7,17 @@
 
   <!-- 필터 선택 페이지 -->
   <div v-if="step === 1">
-    <div class="upload-image" :style="{ backgroundImage: `url(${uploadSrc})` }"></div>
+    <div class="upload-image" :class="filter" :style="{ backgroundImage: `url(${uploadSrc})` }"></div>
     <div class="filters">
-      <FilterBox :image="uploadSrc">Slot 연습</FilterBox>
+      <FilterBox :image="uploadSrc">
+        <!-- Slot 연습 -->
+      </FilterBox>
     </div>
   </div>
 
   <!-- 글 작성 페이지 -->
   <div v-if="step === 2">
-    <div class="upload-image" :style="{ backgroundImage: `url(${uploadSrc})` }"></div>
+    <div class="upload-image" :class="filter" :style="{ backgroundImage: `url(${uploadSrc})` }"></div>
     <div class="write">
       <textarea class="write-box" @change="changeHandler">write!</textarea>
     </div>
@@ -33,6 +35,7 @@ export default {
     step: Number,
     uploadSrc: String,
     posts: Array,
+    filter: String,
   },
   components: {
     Post,
