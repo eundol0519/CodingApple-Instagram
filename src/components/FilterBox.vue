@@ -1,12 +1,24 @@
 <template>
-  <div class="filter-item" :style="{ backgroundImage: `url(${image})` }"></div>
+  <!-- or :class="filter + ' filter-item'" -->
+  <div class="filter-item" :class="filter" :style="{ backgroundImage: `url(${image})` }" :key="i" v-for="(filter, i) in filters">
+    {{ filter }}
+    <slot></slot>
+  </div>
 </template>
 
 <script>
+import { filters } from "@/constants/filters";
+
 export default {
   name: "FilterBox",
   props: {
     image: String,
+  },
+  data() {
+    return {
+      filters: filters,
+      selectFilter: "",
+    };
   },
 };
 </script>

@@ -9,7 +9,7 @@
   <div v-if="step === 1">
     <div class="upload-image" :style="{ backgroundImage: `url(${uploadSrc})` }"></div>
     <div class="filters">
-      <FilterBox :image="uploadSrc" />
+      <FilterBox :image="uploadSrc">Slot 연습</FilterBox>
     </div>
   </div>
 
