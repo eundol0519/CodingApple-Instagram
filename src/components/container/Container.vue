@@ -21,13 +21,12 @@
   <div v-if="step === 2">
     <div class="upload-image" :style="{ backgroundImage: `url(${uploadSrc})` }"></div>
     <div class="write">
-      <textarea class="write-box">write!</textarea>
+      <textarea class="write-box" @change="changeHandler">write!</textarea>
     </div>
   </div>
 </template>
 
 <script>
-import { data } from "@/constants/data";
 import Post from "../post/Post.vue";
 import { getData } from "@/hooks/getData";
 
@@ -36,13 +35,13 @@ export default {
   props: {
     step: Number,
     uploadSrc: String,
+    post: Array,
   },
   components: {
     Post,
   },
   data() {
     return {
-      post: data,
       count: 0,
     };
   },
@@ -51,11 +50,14 @@ export default {
       const data = await getData(this.count);
 
       if (data) {
-        this.post.push(data);
+        this.$emit("moreData", data);
         this.count++;
       } else {
         alert("데이터가 없습니다.");
       }
+    },
+    changeHandler(e) {
+      this.$emit("changeContent", e.target.value);
     },
   },
 };

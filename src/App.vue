@@ -1,10 +1,11 @@
 <template>
   <div class="header">
     <ul class="header-button-left" @click="step--">
-      <li>Cancel</li>
+      <li v-if="step !== 0">Cancel</li>
     </ul>
-    <ul class="header-button-right" @click="step++">
-      <li>Next</li>
+    <ul class="header-button-right">
+      <li v-if="step === 1" @click="step++">Next</li>
+      <li v-if="step === 2" @click="publish">Publish</li>
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
@@ -13,9 +14,9 @@
     <button :key="i" v-for="(item, i) in tab" @click="step = item.page">{{ item.name }}</button>
   </div>
 
-  <Container :step="step" :uploadSrc="uploadSrc" />
+  <Container :step="step" :uploadSrc="uploadSrc" :post="post" @moreData="moreData" @changeContent="changeContent" />
 
-  <div class="footer">
+  <div class="footer" v-if="step === 0">
     <ul class="footer-button-plus">
       <input type="file" id="file" class="inputfile" @change="upload" accept="image/*" />
       <label for="file" class="input-plus">+</label>
@@ -25,6 +26,7 @@
 
 <script>
 import Container from "./components/container/Container.vue";
+import { data } from "@/constants/data";
 
 export default {
   name: "App",
@@ -33,6 +35,7 @@ export default {
   },
   data() {
     return {
+      post: data,
       tab: [
         {
           name: "게시물 목록",
@@ -46,16 +49,38 @@ export default {
       ],
       step: 0,
       uploadSrc: null,
+      content: "",
     };
   },
   methods: {
     upload(e) {
-      this.step = 1;
-
       // FileLeader() or URL.createObjectUrl()
       const file = e.target.files; // 업로드한 파일 정보들이 담겨져 있음
       const url = URL.createObjectURL(file[0]);
       this.uploadSrc = url;
+
+      this.step++;
+    },
+    publish() {
+      const addPost = {
+        name: "Kim Hyun",
+        userImage: "https://picsum.photos/100?random=3",
+        postImage: this.uploadSrc,
+        likes: 36,
+        date: "May 15",
+        liked: false,
+        content: this.content,
+        filter: "perpetua",
+      };
+
+      this.post.unshift(addPost);
+      this.step = 0;
+    },
+    moreData(data) {
+      this.post.push(data);
+    },
+    changeContent(value) {
+      this.content = value;
     },
   },
 };
