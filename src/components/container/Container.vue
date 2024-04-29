@@ -1,7 +1,7 @@
 <template>
   <!-- 게시물 목록 페이지 -->
   <div v-if="step === 0">
-    <Post :key="i" v-for="(item, i) in post" :data="item" />
+    <Post :key="i" v-for="(post, i) in posts" :post="post" />
     <button @click="more">더보기</button>
   </div>
 
@@ -9,11 +9,7 @@
   <div v-if="step === 1">
     <div class="upload-image" :style="{ backgroundImage: `url(${uploadSrc})` }"></div>
     <div class="filters">
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
+      <FilterBox :image="uploadSrc" />
     </div>
   </div>
 
@@ -27,6 +23,7 @@
 </template>
 
 <script>
+import FilterBox from "../FilterBox.vue";
 import Post from "../post/Post.vue";
 import { getData } from "@/hooks/getData";
 
@@ -35,10 +32,11 @@ export default {
   props: {
     step: Number,
     uploadSrc: String,
-    post: Array,
+    posts: Array,
   },
   components: {
     Post,
+    FilterBox,
   },
   data() {
     return {

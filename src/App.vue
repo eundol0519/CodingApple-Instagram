@@ -14,7 +14,7 @@
     <button :key="i" v-for="(item, i) in tab" @click="step = item.page">{{ item.name }}</button>
   </div>
 
-  <Container :step="step" :uploadSrc="uploadSrc" :post="post" @moreData="moreData" @changeContent="changeContent" />
+  <Container :step="step" :uploadSrc="uploadSrc" :posts="posts" @moreData="moreData" @changeContent="changeContent" />
 
   <div class="footer" v-if="step === 0">
     <ul class="footer-button-plus">
@@ -26,7 +26,7 @@
 
 <script>
 import Container from "./components/container/Container.vue";
-import { data } from "@/constants/data";
+import { posts } from "@/constants/posts";
 
 export default {
   name: "App",
@@ -35,7 +35,7 @@ export default {
   },
   data() {
     return {
-      post: data,
+      posts: posts,
       tab: [
         {
           name: "게시물 목록",
@@ -73,11 +73,11 @@ export default {
         filter: "perpetua",
       };
 
-      this.post.unshift(addPost);
+      this.posts.unshift(addPost);
       this.step = 0;
     },
     moreData(data) {
-      this.post.push(data);
+      this.posts.push(data);
     },
     changeContent(value) {
       this.content = value;
