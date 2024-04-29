@@ -1,4 +1,6 @@
 <template>
+  <h4>현재 count는 {{ $store.state.count }}입니다.</h4>
+
   <div class="header">
     <ul class="header-button-left" @click="step--">
       <li v-if="step !== 0">Cancel</li>
