@@ -1,7 +1,12 @@
 <template>
   <h4>현재 count는 {{ $store.state.count }}입니다.</h4>
-  <button @click="$store.commit('increment', 10)">+</button>
-  <button @click="$store.commit('decrement', 10)">-</button>
+  <button @click="increment(10)">+</button>
+  <button @click="decrement(10)">-</button>
+
+  <h4>Computed를 사용한 store의 state mapState로 받아오기</h4>
+  <p>{{ count }}</p>
+  <p>{{ likes }}</p>
+  <p>{{ likeYN }}</p>
 
   <hr />
 
@@ -31,6 +36,7 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from "vuex";
 import Container from "./components/container/Container.vue";
 import { posts } from "@/constants/posts";
 
@@ -59,6 +65,7 @@ export default {
       filter: "",
     };
   },
+  // 컴포넌트가 생성될 때마다 내부에 있는 메소드가 실행된다.
   methods: {
     upload(e) {
       // FileLeader() or URL.createObjectUrl()
@@ -89,6 +96,13 @@ export default {
     changeContent(value) {
       this.content = value;
     },
+    ...mapMutations(["increment", "decrement"]),
+  },
+  // 첫 컴포넌트 생성 시 실행되고, 이후에는 따로 설정하지 않는 이상 실행되지 않고 처음 실행했을 때 간직한 값을 사용한다.
+  // 계산저장용 함수
+  computed: {
+    ...mapState(["count", "likes", "likeYN"]),
+    // ...mapState({ 작명: 'count', ... }),
   },
   mounted() {
     this.emitter.on("filter", (data) => {

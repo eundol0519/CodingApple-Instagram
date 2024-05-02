@@ -44,8 +44,6 @@ const store = createStore({
             }
         }
     },
-    computed: {
-    }
 })
 
 export default store
