@@ -1,8 +1,8 @@
 <template>
   <!-- 게시물 목록 페이지 -->
   <div v-if="step === 0">
-    <Post :key="i" v-for="(post, i) in posts" :post="post" />
-    <button @click="more">더보기</button>
+    <Post :key="i" v-for="(post, i) in posts" :post="post" :index="i" />
+    <button @click="$store.dispatch('getData')">더보기</button>
   </div>
 
   <!-- 필터 선택 페이지 -->
@@ -27,14 +27,12 @@
 <script>
 import FilterBox from "../FilterBox.vue";
 import Post from "../post/Post.vue";
-import { getData } from "@/hooks/getData";
 
 export default {
   name: "Container",
   props: {
     step: Number,
     uploadSrc: String,
-    posts: Array,
     filter: String,
   },
   components: {
@@ -43,23 +41,11 @@ export default {
   },
   data() {
     return {
-      count: 0,
+      posts: [],
     };
   },
-  methods: {
-    async more() {
-      const data = await getData(this.count);
-
-      if (data) {
-        this.$emit("moreData", data);
-        this.count++;
-      } else {
-        alert("데이터가 없습니다.");
-      }
-    },
-    changeHandler(e) {
-      this.$emit("changeContent", e.target.value);
-    },
+  mounted() {
+    this.posts = this.$store.state.data;
   },
 };
 </script>

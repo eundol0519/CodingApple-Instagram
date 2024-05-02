@@ -5,9 +5,9 @@
       <div class="profile" :style="{ backgroundImage: `url(${post.userImage})` }"></div>
       <span class="profile-name">{{ post.name }}</span>
     </div>
-    <div class="post-body" :class="post.filter" :style="{ backgroundImage: `url(${post.postImage})` }"></div>
+    <div class="post-body" :class="post.filter" :style="{ backgroundImage: `url(${post.postImage})`, cursor: 'pointer' }" @click="$store.commit('likeHandler')" />
     <div class="post-content">
-      <p>{{ post.likes }} Likes</p>
+      <p>{{ $store.state.likes }} Likes</p>
       <p>
         <strong>{{ 글쓴이아이디 }}</strong
         >{{ post.content }}

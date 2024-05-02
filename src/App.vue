@@ -1,5 +1,9 @@
 <template>
   <h4>현재 count는 {{ $store.state.count }}입니다.</h4>
+  <button @click="$store.commit('increment', 10)">+</button>
+  <button @click="$store.commit('decrement', 10)">-</button>
+
+  <hr />
 
   <div class="header">
     <ul class="header-button-left" @click="step--">
@@ -16,7 +20,7 @@
     <button :key="i" v-for="(item, i) in tab" @click="step = item.page">{{ item.name }}</button>
   </div>
 
-  <Container :step="step" :uploadSrc="uploadSrc" :posts="posts" @moreData="moreData" @changeContent="changeContent" :filter="filter" />
+  <Container :step="step" :uploadSrc="uploadSrc" @moreData="moreData" @changeContent="changeContent" :filter="filter" />
 
   <div class="footer" v-if="step === 0">
     <ul class="footer-button-plus">
