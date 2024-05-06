@@ -1,5 +1,5 @@
 <template>
-  <h4>현재 count는 {{ $store.state.count }}입니다.</h4>
+  <!-- <h4>현재 count는 {{ $store.state.count }}입니다.</h4>
   <button @click="increment(10)">+</button>
   <button @click="decrement(10)">-</button>
 
@@ -8,7 +8,7 @@
   <p>{{ likes }}</p>
   <p>{{ likeYN }}</p>
 
-  <hr />
+  <hr /> -->
 
   <div class="header">
     <ul class="header-button-left" @click="step--">
@@ -58,6 +58,7 @@ export default {
           page: 1,
         },
         { name: "글 작성", page: 2 },
+        { name: "마이페이지", page: 3 },
       ],
       step: 0,
       uploadSrc: null,

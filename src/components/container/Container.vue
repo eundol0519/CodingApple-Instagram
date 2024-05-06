@@ -22,11 +22,17 @@
       <textarea class="write-box" @change="changeHandler">write!</textarea>
     </div>
   </div>
+
+  <!-- 마이페이지 -->
+  <div v-if="step === 3">
+    <MyPage :one="1" />
+  </div>
 </template>
 
 <script>
 import FilterBox from "../FilterBox.vue";
 import Post from "../post/Post.vue";
+import MyPage from "../myPage/MyPage.vue";
 
 export default {
   name: "Container",
@@ -38,6 +44,7 @@ export default {
   components: {
     Post,
     FilterBox,
+    MyPage,
   },
   data() {
     return {
