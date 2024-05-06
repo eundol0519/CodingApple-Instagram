@@ -1,24 +1,2 @@
-# instagram
-
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+프로젝트 제목 : 인스타그램<br/>
+프로젝트 배포 링크 : https://coding-apple-instagram.vercel.app/
