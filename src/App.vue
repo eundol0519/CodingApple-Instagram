@@ -10,6 +10,8 @@
 
   <hr /> -->
 
+  <h1>test</h1>
+
   <div class="header">
     <ul class="header-button-left" @click="step--">
       <li v-if="step !== 0">Cancel</li>
